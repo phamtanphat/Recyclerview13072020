@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
 
     private List<Food> mFoods;
+    private OnListenerItemClick mOnListenerItemClick;
 
     public FoodAdapter(List<Food> mFoods) {
         if (mFoods != null){
@@ -49,12 +51,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder>{
     class FoodHolder extends RecyclerView.ViewHolder{
         ImageView imgFood;
         TextView txtNameFood,txtPriceFood,txtDescribeFood;
-        public FoodHolder(@NonNull View itemView) {
+        public FoodHolder(@NonNull final View itemView) {
             super(itemView);
             imgFood = itemView.findViewById(R.id.imageFood);
             txtNameFood = itemView.findViewById(R.id.textviewNameFood);
             txtPriceFood = itemView.findViewById(R.id.textviewPriceFood);
             txtDescribeFood = itemView.findViewById(R.id.textviewDescribeFood);
+            
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnListenerItemClick.onItemClick(getAdapterPosition());
+                }
+            });
         }
+    }
+    public void setOnListenerItemClick(OnListenerItemClick onListenerItemClick){
+        this.mOnListenerItemClick = onListenerItemClick;
     }
 }

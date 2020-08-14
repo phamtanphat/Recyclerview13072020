@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,9 +30,15 @@ public class MainActivity extends AppCompatActivity {
         mArrayFoods.add(new Food(R.drawable.hinh_mon_muc,"Mực nướng","Hải sản tươi sống",25000));
 
         mFoodAdapter = new FoodAdapter(mArrayFoods);
-        mRcvFood.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
-        mRcvFood.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+        mRcvFood.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         mRcvFood.setAdapter(mFoodAdapter);
 
+
+        mFoodAdapter.setOnListenerItemClick(new OnListenerItemClick() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(MainActivity.this, mArrayFoods.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
