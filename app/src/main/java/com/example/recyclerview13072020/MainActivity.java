@@ -1,6 +1,8 @@
 package com.example.recyclerview13072020;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -25,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         mArrayFoods.add(new Food(R.drawable.hinh_mon_bun_mam,"Bún mắm","Bún mắm đặc sản quán cô Ba",40000));
         mArrayFoods.add(new Food(R.drawable.hinh_mon_bun_rieu,"Bún riêu","Bún mắm đặc sản quán cô Ba",25000));
         mArrayFoods.add(new Food(R.drawable.hinh_mon_muc,"Mực nướng","Hải sản tươi sống",25000));
+
+        mFoodAdapter = new FoodAdapter(mArrayFoods);
+        mRcvFood.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        mRcvFood.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+        mRcvFood.setAdapter(mFoodAdapter);
 
     }
 }
