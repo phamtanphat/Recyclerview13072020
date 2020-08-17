@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
         mFoodAdapter.setOnListenerItemClick(new OnListenerItemClick() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(MainActivity.this, mArrayFoods.get(position).getName(), Toast.LENGTH_SHORT).show();
+                mArrayFoods.remove(position);
+//                mFoodAdapter.notifyDataSetChanged();
+                mFoodAdapter.notifyItemRemoved(position);
+                Log.d("BBB",mArrayFoods.size() + "");
             }
         });
     }
